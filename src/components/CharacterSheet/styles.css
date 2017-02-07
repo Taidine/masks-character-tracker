@@ -1,0 +1,46 @@
+.container {
+  width: 70%;
+  margin: auto;
+}
+
+.header {
+  width: 100%;
+  height: 60px;
+  font-size: 14px;
+  line-height: 60px;
+  text-align: center;
+}
+
+.inputGroup {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.inputField {
+  width: 30%;
+  flex-grow: 1;
+}
+
+.statGroup {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.labelBox {
+  flex-basis: 1 1;
+}
+
+.conditionsBox {
+  flex-basis: 3 3;
+
+}
+
+.accordion {
+
+}
+
+.potentialGroup {
+
+}
