@@ -1,3 +1,15 @@
+export const labelLabels = ['Freak', 'Danger', 'Savior', 'Superior', 'Mundane'];
+
+export const conditionLabels = ['Hopeless', 'Afraid', 'Insecure', 'Guilty', 'Angry'];
+
+export const conditionText = [
+  '-2 to Unleash Your Powers',
+  '-2 to Directly Engage',
+  '-2 to Defend or Reject Other’s Influence',
+  '-2 to Provoke Someone or Assess the Situation',
+  '-2 to Comfort or Support Someone or Pierce the Mask',
+]
+
 export const mockSheet1 = {
   playbook: 'The Outsider',
   name: 'Enfys Yl\'Carillon',
