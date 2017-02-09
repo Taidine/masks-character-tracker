@@ -40,7 +40,7 @@ class EditableField extends Component {
       );
     } else {
       return (
-          <div className={this.props.className} onClick={this.toggleEdit}>{this.state.value}</div>
+          <div className={this.props.className} onClick={this.toggleEdit}>{this.props.initialValue}</div>
       );
     }
   }

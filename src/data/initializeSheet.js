@@ -1,0 +1,20 @@
+export const sheetTemplate = {
+    cId: '',
+    playbook: '',
+    name: '',
+    heroName: '',
+    player: '',
+    powers: '',
+    labels: [],
+    maxLabels: 13,
+    conditions: [],
+    moves: [],
+    influence: {
+      by: [],
+      on: [],
+      not: [],
+    },
+    notes: [],
+    potential: 0,
+    advancements: {number: 0, notes: []},
+}

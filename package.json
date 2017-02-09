@@ -10,12 +10,14 @@
     "react-scripts": "0.8.5"
   },
   "dependencies": {
-    "rc-tooltip": "^3.4.2",
     "react": "^15.4.2",
     "react-collapse": "^2.3.3",
     "react-dom": "^15.4.2",
     "react-height": "^2.2.0",
-    "react-motion": "^0.4.7"
+    "react-motion": "^0.4.7",
+    "react-redux": "^5.0.2",
+    "react-tooltip": "^3.2.5",
+    "redux": "^3.6.0"
   },
   "scripts": {
     "start": "react-scripts start",

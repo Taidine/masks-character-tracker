@@ -1,4 +1,5 @@
 export const mockSheet1 = {
+  cId: 2,
   playbook: 'The Outsider',
   name: 'Enfys Yl\'Carillon',
   heroName: 'N/A',

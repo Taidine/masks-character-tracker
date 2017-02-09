@@ -90,6 +90,7 @@
 
 .conditionMarked {
   text-align: center;
+  font-size: small;
 }
 
 @media screen and (max-width: 600px) {

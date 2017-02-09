@@ -2,12 +2,20 @@ export const labelLabels = ['Freak', 'Danger', 'Savior', 'Superior', 'Mundane'];
 
 export const conditionLabels = ['Hopeless', 'Afraid', 'Insecure', 'Guilty', 'Angry'];
 
-export const conditionText = [
+export const conditionPenalty = [
   '-2 to Unleash Your Powers',
   '-2 to Directly Engage',
-  '-2 to Defend or Reject Other’s Influence',
-  '-2 to Provoke Someone or Assess the Situation',
-  '-2 to Comfort or Support Someone or Pierce the Mask',
+  '-2 to Defend or Reject Influence',
+  '-2 to Provoke or Assess',
+  '-2 to Comfort/Support or Pierce the Mask',
+]
+
+export const conditionClear = [
+  'Fling yourself into easy relief',
+  'Run from something difficult',
+  'Take foolhardy action without talking to your team',
+  'Make a sacrifice to absolve your guilt',
+  'Hurt someone or break something important',
 ]
 
 export const mockSheet1 = {
