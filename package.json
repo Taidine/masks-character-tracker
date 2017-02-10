@@ -7,14 +7,17 @@
     "babel-core": "6.14.0",
     "express": "4.13.3",
     "fs": "0.0.2",
+    "mongodb": "^2.2.22",
     "sql.js": "0.3.2"
   },
   "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "babel-node start-client.js",
     "server": "babel-node server.js",
     "lint": "eslint ."
   },
   "devDependencies": {
-    "concurrently": "3.1.0",
+    "concurrently": "^3.1.0",
     "eslint": "3.15.0",
     "eslint-config-airbnb": "14.1.0",
     "eslint-plugin-import": "2.2.0",
