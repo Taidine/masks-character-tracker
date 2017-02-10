@@ -1,5 +1,5 @@
 {
-  "name": "lookup-server",
+  "name": "character-server",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -23,5 +23,6 @@
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jsx-a11y": "4.0.0",
     "eslint-plugin-react": "6.9.0"
+
   }
 }

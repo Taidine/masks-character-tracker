@@ -1,0 +1,37 @@
+.accordion {
+  text-align: left;
+  width: 100%;
+  margin: 10px 0px;
+}
+
+.accordionHeader {
+  height: 25px;
+  line-height: 25px;
+  font-weight: bold;
+  font-size: 12pt;
+  background-color: #444;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerText {
+  margin-left: 5px;
+
+}
+
+.toggleButton {
+  background-color: white;
+  color: black;
+  height: 25px;
+  width: 25px;
+  line-height: 20px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.accordionText {
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-size: small;
+}
