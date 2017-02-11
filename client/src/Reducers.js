@@ -7,44 +7,32 @@ const sheets = (state=[sheetTemplate], action) => {
   switch (action.type) {
 
     case ('RECEIVE_SHEETS'): {
-      return action.sheets;
-    }
-
-    case ('ADD_SHEET'): {
-      const initialValues = action.sheet || {};
-      const cId = {cId: action.cId};
-      const newSheet = Object.assign({}, sheetTemplate, cId, initialValues);
-      return [...state, newSheet];
-    }
-
-    // Single sheet actions
-
-    case ('UPDATE_SHEET'): {
-        const sheetId = action.sheet.cId;
-        const currentSheets = [...state];
-        const sheetIndex = currentSheets.findIndex(s => s.cId === sheetId);
-        const sheetsBefore = currentSheets.slice(0, sheetIndex);
-        const sheetsAfter = currentSheets.slice(sheetIndex+1);
-        return sheetsBefore.concat(action.sheet, sheetsAfter);
+      let newSheets = action.sheets;
+      let currentSheets = state.slice();
+      let sheets = [];
+      currentSheets.forEach ( (currentSheet) => {
+          let newSheetIndex = newSheets.findIndex((ns) => ns.cId === currentSheet.cId);
+          if (newSheetIndex >= 0){
+            let newSheet = newSheets.splice(newSheetIndex, 1);
+            sheets.push(Object.assign({}, currentSheet, newSheet));
+          }
+        });
+      sheets = sheets.concat(newSheets);
+      return sheets;
     }
 
     default: return state;
   }
 }
 
-const cId = (state={ids:[], nextId: 0}, action) => {
+const cId = (state={ids:[]}, action) => {
   switch (action.type) {
     case ('RECEIVE_SHEETS'): {
-      let ids = action.sheets.map(sheet => sheet.cId);
-      ids.sort();
-      const nextId = ids[ids.length] + 1;
-      return ({ids, nextId});
-    }
-
-    case ('ADD_SHEET'): {
-      const nextId = action.cId + 1;
-      const ids = [...state.ids, action.cId];
-      return {ids, nextId};
+      let newIds = action.sheets.map(sheet => sheet.cId);
+      let currentIds = state.ids;
+      newIds = newIds.filter(nId => !currentIds.includes(nId));
+      let ids = currentIds.concat(newIds);
+      return ({ids});
     }
 
     default: return state;
