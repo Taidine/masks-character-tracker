@@ -28,7 +28,7 @@ app.get('/api/hello', (req, res) => {
 
 app.get('/api/characterSheets', (req, res) => {
   var sheets = db.collection('characterSheets').find().toArray(function(err, results) {
-  res.json({error: "show something"});
+  res.json(results);
   console.log(results);
 })
 });

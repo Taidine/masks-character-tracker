@@ -2,42 +2,33 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CharacterSheet from './components/CharacterSheet/CharacterSheet';
 import './App.css';
-import {mockSheet1} from './data/mockData';
 
 class App extends Component {
 
   componentDidMount() {
 
-      const msg = (cb) => fetch('/api/hello')
-        .then(response => {console.log(response); return response})
-        .then(this.checkStatus)
-        .then(this.parseJSON)
-        .then (cb);
+    const receiveSheets = (json) => {
+    return this.props.dispatch({
+      type: 'RECEIVE_SHEETS',
+      sheets: json,
+    });
+  }
 
-      msg((response) => {console.log(response)});
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json; charset=utf-8");
+    var myInit = { method: 'GET',
+               headers: myHeaders,
+               mode: 'cors',
+               cache: 'default' };
 
-      let sheets = [mockSheet1];
-
-      this.props.dispatch({
-        type: 'RECEIVE_SHEETS',
-        sheets
+      fetch('/api/characterSheets', myInit)
+        .then(response => {
+          var contentType = response.headers.get("content-type");
+          if(contentType && contentType.indexOf("application/json") !== -1) {
+            return response.json().then(function(json) {receiveSheets(json)})
+        }
       })
   };
-
-  checkStatus = (response) => {
-    if (response.status >= 200 && response.status < 300) {
-      return response;
-    }
-    const error = new Error(`HTTP Error ${response.statusText}`);
-    error.status = response.statusText;
-    error.response = response;
-    console.log(error); // eslint-disable-line no-console
-    throw error;
-  }
-
-  parseJSON = (response) => {
-    response.json();
-  }
 
   render() {
     return (
