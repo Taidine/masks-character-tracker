@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import ReactTooltip from 'react-tooltip'
+import ReactTooltip from 'react-tooltip';
+import * as Actions from '../../actions';
 import './styles.css';
 import EditableInput from '../EditableInput/EditableInput';
 import EditableField from '../EditableField/EditableField';
@@ -13,10 +15,11 @@ class CharacterSheet extends Component {
     let newField = {};
     newField[name] = value;
     const sheet = Object.assign({}, this.props.currentSheet, newField);
-    this.props.dispatch({
-      type: 'UPDATE_SHEET',
-      sheet,
-    });
+    this.props.updateSheet(sheet);
+  }
+
+  onDeleteSheet = () => {
+    this.props.deleteSheet(this.props.cId);
   }
 
   render() {
@@ -58,6 +61,7 @@ class CharacterSheet extends Component {
       <ReactTooltip place={"top"}/>
         <div className={"header"}>
           {this.props.playbook}
+          <button onClick={this.onDeleteSheet}>x</button>
         </div>
         <div className={"inputGroup"}>
           <EditableInput label={"Name"} initialValue={this.props.name} onSave={this.saveField.bind(this, 'name')} />
@@ -121,13 +125,17 @@ class CharacterSheet extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const cId = ownProps.cId;
-  const sheet = state.sheets.find(s => s.cId = cId);
+  const sheet = state.sheets.sheets.find(s => s.cId === cId);
   return {
     ...sheet,
     currentSheet: {...sheet},
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(Actions, dispatch);
+}
+
 export default CharacterSheet = connect(
   mapStateToProps,
-  null)(CharacterSheet);
+  mapDispatchToProps)(CharacterSheet);

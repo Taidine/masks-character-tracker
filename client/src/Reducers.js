@@ -1,38 +1,33 @@
 import { combineReducers } from 'redux';
-import { sheetTemplate } from './data/initializeSheet';
 
 // Reducers
 
-const sheets = (state=[sheetTemplate], action) => {
+const sheets = (state={}, action) => {
   switch (action.type) {
 
+    case ('FETCHING_SHEETS'): {
+      return {...state, isFetching: true};
+    }
+
     case ('RECEIVE_SHEETS'): {
-      let newSheets = action.sheets;
-      let currentSheets = state.slice();
-      let sheets = [];
-      currentSheets.forEach ( (currentSheet) => {
-          let newSheetIndex = newSheets.findIndex((ns) => ns.cId === currentSheet.cId);
-          if (newSheetIndex >= 0){
-            let newSheet = newSheets.splice(newSheetIndex, 1);
-            sheets.push(Object.assign({}, currentSheet, newSheet));
-          }
-        });
-      sheets = sheets.concat(newSheets);
-      return sheets;
+      let sheets = action.sheets;
+      return {sheets, isFetching: false};
+    }
+
+    case ('RECEIVE_SHEETS_FAILED'): {
+      console.log("Error receiving sheets");
+      return {...state, isFetching: false};
     }
 
     default: return state;
   }
 }
 
-const cId = (state={ids:[]}, action) => {
+const cId = (state={}, action) => {
   switch (action.type) {
     case ('RECEIVE_SHEETS'): {
       let newIds = action.sheets.map(sheet => sheet.cId);
-      let currentIds = state.ids;
-      newIds = newIds.filter(nId => !currentIds.includes(nId));
-      let ids = currentIds.concat(newIds);
-      return ({ids});
+      return ({ids: newIds});
     }
 
     default: return state;

@@ -1,13 +1,13 @@
-export const sheetTemplate = {
+const sheetTemplate = {
     cId: '',
     playbook: '',
     name: '',
     heroName: '',
     player: '',
     powers: '',
-    labels: [],
+    labels: [0,0,0,0,0],
     maxLabels: 13,
-    conditions: [],
+    conditions: [false, false, false, false, false],
     moves: [],
     influence: {
       by: [],
@@ -18,3 +18,5 @@ export const sheetTemplate = {
     potential: 0,
     advancements: {number: 0, notes: []},
 }
+
+export default sheetTemplate;

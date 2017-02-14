@@ -30,6 +30,7 @@ app.get('/api/hello', (req, res) => {
 
 app.get('/api/characterSheets', (req, res) => {
   var sheets = db.collection('characterSheets').find().toArray(function(err, results) {
+    console.log(results);
     res.json(results);
   })
 })
@@ -48,6 +49,13 @@ app.put('/api/characterSheets', (req, res) => {
   var update = req.body;
   var opts = {};
   db.collection('characterSheets').update(query, update, opts, (err, result) => {
+    err ? res.status(500).json({error: err}) : res.status(200).json({cId: req.body.cId});
+  })
+})
+
+app.delete('/api/characterSheets', (req, res) => {
+  var query = {'cId': req.body.cId};
+  db.collection('characterSheets').findOneAndDelete(query, (err, result) => {
     err ? res.status(500).json({error: err}) : res.status(200).json({cId: req.body.cId});
   })
 })

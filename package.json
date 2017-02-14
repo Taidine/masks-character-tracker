@@ -9,6 +9,7 @@
     "express": "4.13.3",
     "fs": "0.0.2",
     "mongodb": "^2.2.22",
+    "redux-thunk": "^2.2.0",
     "sql.js": "0.3.2"
   },
   "scripts": {
@@ -23,6 +24,7 @@
     "eslint-config-airbnb": "14.1.0",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jsx-a11y": "4.0.0",
-    "eslint-plugin-react": "6.9.0"
+    "eslint-plugin-react": "6.9.0",
+    "redux-logger": "^2.8.1"
   }
 }
