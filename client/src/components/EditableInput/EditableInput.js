@@ -7,41 +7,68 @@ class EditableInput extends Component {
     super();
     this.state = {
       value: props.initialValue,
-      isEditing: false,
+      isEditing: props.initialValue === '' ? true : false,
     };
   }
 
-  componentWillReceiveProps (nextProps, props) {
-    this.setState ({isEditing: false});
+  componentWillReceiveProps (newProps) {
+    if (newProps.initialValue !== '') {
+      this.closeEdit();
+    }
   }
 
-  toggleEdit = () => {
-    this.setState({isEditing: !this.state.isEditing});
+  openEdit = () => {
+    this.setState({isEditing: true});
+  }
+
+  closeEdit = () => {
+    this.setState({isEditing: false});
   }
 
   changeValue = (e) => {
     this.setState({value: e.target.value});
   }
 
+  handleBlur = () => {
+    if (this.props.initialValue === this.state.value && this.state.value !== '') {
+      this.closeEdit();
+    }
+  }
+
   handleSave = () => {
-    this.toggleEdit();
     this.props.onSave(this.state.value);
   }
 
   render() {
+    let fieldContent;
+    if (this.props.selectOptions) {
+      fieldContent = <select className={"fieldInput"} value={this.state.value} onChange={this.changeValue} onBlur={this.handleBlur}>
+                      <option key={-1} value='' />
+                      {this.props.selectOptions.map((opt, i) => <option key={i} value={opt.value}>{opt.text}</option>)}
+                    </select>;
+    } else {
+      fieldContent = <input
+                        className={"fieldInput"}
+                        type='text'
+                        value={this.state.value}
+                        onChange={this.changeValue}
+                        onBlur={this.handleBlur}
+                      />;
+    }
+
     if (this.state.isEditing) {
       return (
         <div className={"field"}>
           <div className={"fieldLabel"}>{this.props.label}</div>
-          <input className={"fieldInput"} type='text' value={this.state.value} onChange={this.changeValue} />
+          {fieldContent}
           <span className={"saveButton"} onClick={this.handleSave}>&#10003;</span>
         </div>
       );
     } else {
       return (
-          <div className={"field"} onClick={this.toggleEdit}>
+          <div className={"field"}>
             <div className={"fieldLabel"}>{this.props.label}</div>
-            <div className={"fieldText"}>{this.state.value}</div>
+            <div className={"fieldText"} onClick={this.openEdit}>{this.state.value}</div>
           </div>
       );
     }

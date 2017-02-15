@@ -18,6 +18,23 @@ export const conditionClear = [
   'Hurt someone or break something important',
 ]
 
+export const playbookOpts = [
+  {value: 'The Beacon', text: 'Beacon' },
+  {value: 'The Bull', text: 'Bull' },
+  {value: 'The Doomed', text: 'Doomed' },
+  {value: 'The Delinquent', text: 'Delinquent' },
+  {value: 'The Janus', text: 'Janus' },
+  {value: 'The Protege', text: 'Protege' },
+  {value: 'The Legacy', text: 'Legacy' },
+  {value: 'The Outsider', text: 'Outsider' },
+  {value: 'The Nova', text: 'Nova' },
+  {value: 'The Joined', text: 'Joined' },
+  {value: 'The Star', text: 'Star' },
+  {value: 'The Reformed', text: 'Reformed' },
+  {value: 'The Newborn', text: 'Newborn' },
+  {value: 'The Innocent', text: 'Innocent' },
+]
+
 export const mockSheet1 = {
   playbook: 'The Outsider',
   name: 'Enfys Yl\'Carillon',

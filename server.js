@@ -30,7 +30,6 @@ app.get('/api/hello', (req, res) => {
 
 app.get('/api/characterSheets', (req, res) => {
   var sheets = db.collection('characterSheets').find().toArray(function(err, results) {
-    console.log(results);
     res.json(results);
   })
 })

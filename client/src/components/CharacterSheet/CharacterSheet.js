@@ -4,10 +4,15 @@ import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 import * as Actions from '../../actions';
 import './styles.css';
+import Header from '../Header/Header';
 import EditableInput from '../EditableInput/EditableInput';
+import LabelComponent from '../LabelComponent/LabelComponent';
 import EditableField from '../EditableField/EditableField';
 import Accordion from '../Accordion/Accordion';
-import {labelLabels, conditionLabels, conditionPenalty, conditionClear} from '../../data/constants';
+import { conditionLabels,
+  conditionPenalty,
+  conditionClear,
+  playbookOpts } from '../../data/constants';
 
 class CharacterSheet extends Component {
 
@@ -36,12 +41,6 @@ class CharacterSheet extends Component {
           <div className={"accordionText"}>{note}</div>
         </div>
       )
-    const labelTableContent = this.props.labels.map ((label, i) =>
-      <tr className={i%2 ? "rowHighlight": "rowLowlight"} key={i}>
-        <td className={"labelLabel"}>{labelLabels[i]}</td>
-        <td className={"labelValue"}> {(label - 2 > 0) ? '+' + (label-2) : (label-2) } </td>
-      </tr>
-    );
     const conditionsTableContent = this.props.conditions.map ((condition, i) =>
       <tr className={i%2 ? "rowHighlight": "rowLowlight"} key={i}>
         <td className={(condition === 1 ? "bold " : "") + "conditionLabel"}>
@@ -60,8 +59,7 @@ class CharacterSheet extends Component {
       <div className={"container"}>
       <ReactTooltip place={"top"}/>
         <div className={"header"}>
-          {this.props.playbook}
-          <button onClick={this.onDeleteSheet}>x</button>
+          <Header initialValue={this.props.playbook} selectOptions={playbookOpts} onSave={this.saveField.bind(this, 'playbook')} onDelete={this.onDeleteSheet} />
         </div>
         <div className={"inputGroup"}>
           <EditableInput label={"Name"} initialValue={this.props.name} onSave={this.saveField.bind(this, 'name')} />
@@ -69,14 +67,7 @@ class CharacterSheet extends Component {
           <EditableInput label={"Player"} initialValue={this.props.player} onSave={this.saveField.bind(this, 'player')} />
         </div>
         <div className={"statGroup"}>
-          <div className={"labelBox"}>
-            <div className={"subheader"} style={{marginLeft:'2px'}}>{'Labels'}</div>
-            <table className={"labelTable"}>
-              <tbody>
-              {labelTableContent}
-              </tbody>
-            </table>
-          </div>
+          <LabelComponent initialLabels={this.props.labels} maxLabels={this.props.maxLabels} name={this.props.name} onSave={this.saveField.bind(this, 'labels')} />
           <div className={"conditionsBox"}>
             <div className={"subheader"} style={{marginLeft:'2px'}}>{'Conditions'}</div>
             <table className={"conditionsTable"}>
@@ -86,7 +77,13 @@ class CharacterSheet extends Component {
             </table>
           </div>
         </div>
-        <Accordion headerText={'Moves'}>{moves}</Accordion>
+        <Accordion headerText={'Moves & Powers'}>
+          <div key={-1}>
+            <span className={"subheader"}>{'Powers'}</span>
+            <EditableField className={"accordionText"} initialValue={this.props.powers} onSave={this.saveField.bind(this, 'powers')}/>
+          </div>
+          {moves}
+        </Accordion>
         <Accordion headerText={'Influence'}>
           <div className={"influenceGroup"}>
             <div className={"influenceColumn"}>
