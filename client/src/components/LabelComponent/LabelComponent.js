@@ -23,7 +23,7 @@ class LabelComponent extends Component {
   }
 
   toggleOpen = (isOpen) => {
-    isOpen = typeof isOpen === 'bool' ? isOpen : !this.state.isOpen; 
+    isOpen = typeof isOpen === 'boolean' ? isOpen : !this.state.isOpen; 
     this.setState({isOpen});
   }
 

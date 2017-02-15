@@ -7,7 +7,7 @@ export const conditionPenalty = [
   '-2 to Directly Engage',
   '-2 to Defend or Reject Influence',
   '-2 to Provoke or Assess',
-  '-2 to Comfort/Support or Pierce the Mask',
+  '-2 to Comfort/Support, Pierce the Mask',
 ]
 
 export const conditionClear = [

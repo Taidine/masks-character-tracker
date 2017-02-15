@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import ReactTooltip from 'react-tooltip';
 import * as Actions from '../../actions';
 import './styles.css';
 import Header from '../Header/Header';
 import EditableInput from '../EditableInput/EditableInput';
 import LabelComponent from '../LabelComponent/LabelComponent';
+import ConditionComponent from '../ConditionComponent/ConditionComponent';
 import EditableField from '../EditableField/EditableField';
 import Accordion from '../Accordion/Accordion';
-import { conditionLabels,
-  conditionPenalty,
-  conditionClear,
-  playbookOpts } from '../../data/constants';
+import { playbookOpts } from '../../data/constants';
 
 class CharacterSheet extends Component {
 
@@ -41,23 +38,8 @@ class CharacterSheet extends Component {
           <div className={"accordionText"}>{note}</div>
         </div>
       )
-    const conditionsTableContent = this.props.conditions.map ((condition, i) =>
-      <tr className={i%2 ? "rowHighlight": "rowLowlight"} key={i}>
-        <td className={(condition === 1 ? "bold " : "") + "conditionLabel"}>
-            <div style={{display:"inline-block"}}>{conditionLabels[i]}</div>
-            <div style={{display:"inline-block", fontSize: 'small', marginLeft: '5px'}}>
-              {' (' + conditionPenalty[i] + ') '}
-            </div>
-          </td>
-          <td className={"conditionMarked bold"}>
-            <div data-tip={conditionClear[i]}>
-              {condition === 1 ? '[clear]' : '' }
-            </div></td>
-      </tr>
-    );
     return (
       <div className={"container"}>
-      <ReactTooltip place={"top"}/>
         <div className={"header"}>
           <Header initialValue={this.props.playbook} selectOptions={playbookOpts} onSave={this.saveField.bind(this, 'playbook')} onDelete={this.onDeleteSheet} />
         </div>
@@ -68,14 +50,7 @@ class CharacterSheet extends Component {
         </div>
         <div className={"statGroup"}>
           <LabelComponent initialLabels={this.props.labels} maxLabels={this.props.maxLabels} name={this.props.name} onSave={this.saveField.bind(this, 'labels')} />
-          <div className={"conditionsBox"}>
-            <div className={"subheader"} style={{marginLeft:'2px'}}>{'Conditions'}</div>
-            <table className={"conditionsTable"}>
-              <tbody>
-              {conditionsTableContent}
-              </tbody>
-            </table>
-          </div>
+          <ConditionComponent initialConditions={this.props.conditions} onSave={this.saveField.bind(this, 'conditions')} />
         </div>
         <Accordion headerText={'Moves & Powers'}>
           <div key={-1}>
