@@ -29,6 +29,16 @@
   font-size: small;
 }
 
+.tinyLink {
+  font-size: smaller;
+  margin: 0px 5px;
+}
+
+.tinyLink.error {
+  color: gray;
+  text-decoration: none;
+}
+
 .bold {
   font-weight: bold;
 }

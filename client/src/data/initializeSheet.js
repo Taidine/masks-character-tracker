@@ -6,7 +6,7 @@ const sheetTemplate = {
     player: '',
     powers: '',
     labels: [0,0,0,0,0],
-    maxLabels: 13,
+    maxLabels: 3,
     conditions: [false, false, false, false, false],
     moves: [],
     influence: {

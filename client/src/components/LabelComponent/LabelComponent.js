@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
+import ReactTooltip from 'react-tooltip';
 import { labelLabels } from '../../data/constants';
 import './styles.css';
 
@@ -10,22 +11,29 @@ class LabelComponent extends Component {
     this.state = {
       isOpen: false,
       labels: props.initialLabels,
-      maxLabels: props.maxLabels,
+      totalLabels: props.initialLabels.reduce((total, label) => Number(total) + Number(label)),
+      error: false,
     };
   }
 
-  toggleOpen = () => {
-    this.setState({isOpen: !this.state.isOpen});
+  componentWillReceiveProps (newProps, oldProps) {
+    if (newProps.initialLabels !== oldProps.initialLabels) {
+      this.toggleOpen(false);
+    }
+  }
+
+  toggleOpen = (isOpen) => {
+    isOpen = typeof isOpen === 'bool' ? isOpen : !this.state.isOpen; 
+    this.setState({isOpen});
   }
 
   changeLabel = (index, e) => {
-    let labels = this.state.labels.slice();
-    labels.splice(index, 1, e.target.value);
-    this.setState({labels});
-  }
-
-  generateCarat = () => {
-    return {__html: this.state.isOpen ? '&#9206' : '&#9207'};
+    if (Number(e.target.value) > -3 && Number(e.target.value) < 4) {
+      let labels = this.state.labels.slice();
+      labels.splice(index, 1, e.target.value);
+      let totalLabels = labels.reduce((total, label) => Number(total) + Number(label));
+      this.setState({labels, totalLabels});
+    }
   }
 
   handleCancel = () => {
@@ -33,11 +41,21 @@ class LabelComponent extends Component {
   }
 
   handleSave = () => {
-    this.props.onSave(this.state.labels);
+    if (this.props.maxLabels  === this.state.totalLabels){
+      this.props.onSave(this.state.labels);
+    }
   }
 
   render() {
-    const getLabelValue = (label) => {return (label > 0) ? '+' + label : label };
+    const formatLabel = (label) => {return (label > 0) ? '+' + label : label };
+    const errorText = `Your labels are too ${this.props.maxLabels > this.state.totalLabels ? 'low' : 'high'}.
+      Shift them ${this.props.maxLabels > this.state.totalLabels ? 'up' : 'down, or take an appropriate advancement'}`;
+    let saveButton;
+    if (Number(this.props.maxLabels) === Number(this.state.totalLabels)) {
+      saveButton = <a href={"#"} className={"tinyLink"} onClick={this.handleSave}>[save labels]</a>
+    } else {
+      saveButton = <a href={"#"} className={"tinyLink error"} data-tip={errorText}>[save labels]</a>
+    }
     return (
       <div className={"labelBox"}>
         <div className={"subheader"} style={{marginLeft:'2px'}}>{'Labels'}</div>
@@ -46,7 +64,7 @@ class LabelComponent extends Component {
             {this.state.labels.map((label, i) =>
               <tr className={i%2 ? "rowHighlight": "rowLowlight"} key={i}>
                 <td className={"labelLabel"}>{labelLabels[i]}</td>
-                <td className={"labelValue"}>{getLabelValue(label)}</td>
+                <td className={"labelValue"}>{formatLabel(label)}</td>
               </tr>)}
           </tbody>
         </table>
@@ -56,7 +74,7 @@ class LabelComponent extends Component {
           overlayClassName={"modalOverlay"}
           className={"modalContent"}
           contentLabel="Modal">
-              <div className={"subheader"} style={{marginLeft:'2px'}}>{`Edit ${this.props.name}'s labels`}</div>
+              <div className={"subheader"} style={{marginLeft:'2px'}}>{`Edit labels for ${this.props.name}`}</div>
               <table className={"labelTable"}>
                 <tbody>
                   {this.state.labels.map((label, i) =>
@@ -67,8 +85,9 @@ class LabelComponent extends Component {
                 </tbody>
               </table>
               <div className={"modalFooter"}>
+                <ReactTooltip place={"top"}/>
                 <a href={"#"} className={"tinyLink"} onClick={this.handleCancel}>[cancel]</a>
-                <a href={"#"} className={"tinyLink"} onClick={this.handleSave}>[save labels]</a>
+                {saveButton}
               </div>
         </Modal>
       </div>
