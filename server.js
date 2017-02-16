@@ -15,7 +15,7 @@ var mongoURI = 'mongodb://root:database1@localhost:27017/test';
 MongoClient.connect(mongoURI, (err, database) => {
   if (err) return console.log(err)
   db = database
-  app.listen(3002, () => {
+  app.listen(port, () => {
     console.log('listening on 3002')
   })
 })
