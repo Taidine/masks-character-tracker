@@ -7,7 +7,12 @@ const app = express();
 app.set('port', (process.env.PORT || 3002));
 app.use(bodyParser.json());
 
-MongoClient.connect('mongodb://root:database1@localhost:27017/test', (err, database) => {
+var mongoURI = 'mongodb://root:database1@localhost:27017/test';
+ if (process.env.NODE_ENV === 'production') {
+  mongoURI = 'mongodb://root:database1@ds054999.mlab.com:54999/masks_db';
+ }
+
+MongoClient.connect(mongoURI, (err, database) => {
   if (err) return console.log(err)
   db = database
   app.listen(3002, () => {
