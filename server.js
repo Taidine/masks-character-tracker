@@ -4,7 +4,8 @@ const bodyParser= require('body-parser');
 const MongoClient = require('mongodb').MongoClient
 
 const app = express();
-app.set('port', (process.env.PORT || 3002));
+const port = (process.env.PORT || 3002);
+app.set('port', port);
 app.use(bodyParser.json());
 
 var mongoURI = 'mongodb://root:database1@localhost:27017/test';
