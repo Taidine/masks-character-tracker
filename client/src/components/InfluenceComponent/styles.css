@@ -1,0 +1,36 @@
+.labelTable {
+  width: 100%;
+}
+
+.modalOverlay {
+  position:absolute;
+  top:0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modalContent {
+    background-color: white;
+    padding: 0px 10px 10px 10px;
+    border: 1px solid gray;
+    width: 300px;
+    margin: auto;
+}
+
+@media screen and (max-width: 300px) {
+  .modalContent {
+    width: 100%;
+    padding: 0px;
+  }
+}
+
+.labelLabel {
+  text-align: left;
+}
+
+.labelValue {
+  text-align: right;
+}

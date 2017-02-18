@@ -38,7 +38,7 @@ class EditableField extends Component {
     this.props.onSave({label: this.state.label, value: this.state.value});
   }
 
-  handleDelete = () => {
+  handleCancel = () => {
     this.props.onRemove({label: this.state.label, value: this.state.value});
   }
 
@@ -56,7 +56,7 @@ class EditableField extends Component {
             <textarea className={"fieldTextArea"} type='text' value={this.state.value} onChange={this.changeValue} />
             <div className="fieldFooter">
               <span className={"fieldSaveButton"} onClick={this.handleSave}>&#10003;</span>
-              {this.props.onRemove ? <span className={"fieldSaveButton"} onClick={this.handleDelete}>x</span> : ''}
+              {this.props.onRemove ? <span className={"fieldSaveButton"} onClick={this.handleCancel}>x</span> : ''}
             </div>
           </div>
       );

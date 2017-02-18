@@ -39,6 +39,10 @@ class EditableInput extends Component {
     this.props.onSave(this.state.value);
   }
 
+  handleCancel = () => {
+    this.props.onRemove(this.state.value);
+  }
+
   render() {
     let fieldContent;
     if (this.props.selectOptions) {
@@ -62,6 +66,7 @@ class EditableInput extends Component {
           {this.props.label ? <div className={"fieldLabel"}>{this.props.label}</div> : ""}
           {fieldContent}
           <span className={"saveButton"} onClick={this.handleSave}>&#10003;</span>
+          {this.props.onRemove ? <span className={"saveButton"} onClick={this.handleCancel}>x</span> : ''}
         </div>
       );
     } else {

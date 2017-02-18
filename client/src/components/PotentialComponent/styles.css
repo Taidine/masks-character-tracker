@@ -1,0 +1,19 @@
+.conditionsTable {
+  width: 100%;
+}
+
+.conditionPenalty {
+  display: inline-block;
+  font-size: smaller;
+  margin-left: 5px;
+}
+
+.markCondition {
+  text-align: center;
+  width: 55px;
+}
+
+.markClear {
+    font-size: small;
+    cursor: pointer;
+}

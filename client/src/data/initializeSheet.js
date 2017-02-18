@@ -4,11 +4,11 @@ const sheetTemplate = {
     name: '',
     heroName: '',
     player: '',
-    powers: '',
+    powers: {label: '', value:''},
     labels: [0,0,0,0,0],
     maxLabels: 3,
     conditions: [false, false, false, false, false],
-    moves: [],
+    moves: [{name: '', text:''}],
     influence: {
       by: [],
       on: [],
