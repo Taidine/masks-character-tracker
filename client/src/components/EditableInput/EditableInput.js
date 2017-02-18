@@ -59,7 +59,7 @@ class EditableInput extends Component {
     if (this.state.isEditing) {
       return (
         <div className={"field"}>
-          <div className={"fieldLabel"}>{this.props.label}</div>
+          {this.props.label ? <div className={"fieldLabel"}>{this.props.label}</div> : ""}
           {fieldContent}
           <span className={"saveButton"} onClick={this.handleSave}>&#10003;</span>
         </div>
@@ -67,7 +67,7 @@ class EditableInput extends Component {
     } else {
       return (
           <div className={"field"}>
-            <div className={"fieldLabel"}>{this.props.label}</div>
+            {this.props.label ? <div className={"fieldLabel"}>{this.props.label}</div> : ""}
             <div className={"fieldText"} onClick={this.openEdit}>{this.state.value}</div>
           </div>
       );

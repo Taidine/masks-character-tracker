@@ -7,6 +7,7 @@ import Header from '../Header/Header';
 import EditableInput from '../EditableInput/EditableInput';
 import LabelComponent from '../LabelComponent/LabelComponent';
 import ConditionComponent from '../ConditionComponent/ConditionComponent';
+import MovesComponent from '../MovesComponent/MovesComponent';
 import EditableField from '../EditableField/EditableField';
 import Accordion from '../Accordion/Accordion';
 import { playbookOpts } from '../../data/constants';
@@ -25,13 +26,6 @@ class CharacterSheet extends Component {
   }
 
   render() {
-  const moves = this.props.moves.map(
-    (move, index) =>
-      <div key={index}>
-        <span className={"subheader"}>{move.name}</span>
-        <EditableField className={"accordionText"} initialValue={move.text} onSave={this.saveField.bind(this, 'move')}/>
-      </div>
-    )
     const notes = this.props.notes.map(
       (note, index) =>
         <div key={index}>
@@ -53,11 +47,11 @@ class CharacterSheet extends Component {
           <ConditionComponent initialConditions={this.props.conditions} onSave={this.saveField.bind(this, 'conditions')} />
         </div>
         <Accordion headerText={'Moves & Powers'}>
-          <div key={-1}>
-            <span className={"subheader"}>{'Powers'}</span>
-            <EditableField className={"accordionText"} initialValue={this.props.powers} onSave={this.saveField.bind(this, 'powers')}/>
-          </div>
-          {moves}
+        <div key={-1}>
+          <span className={"subheader"}>{'Powers'}</span>
+          <EditableField className={"accordionText"} initialValue={this.props.powers.value} onSave={this.saveField.bind(this, 'powers')}/>
+        </div>
+          <MovesComponent moves={this.props.moves} onSave={this.saveField.bind(this, 'moves')} />
         </Accordion>
         <Accordion headerText={'Influence'}>
           <div className={"influenceGroup"}>
