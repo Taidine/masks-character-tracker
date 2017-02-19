@@ -16,7 +16,7 @@ const sheetTemplate = {
     },
     notes: [],
     potential: 0,
-    advancements: {number: 0, notes: []},
+    advancements: [],
 }
 
 export default sheetTemplate;

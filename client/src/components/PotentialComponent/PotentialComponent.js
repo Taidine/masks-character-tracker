@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Modal from 'react-modal';
 import './styles.css';
 
 class PotentialComponent extends Component {
@@ -33,11 +34,26 @@ class PotentialComponent extends Component {
         <div className={"potentialField"}>
           {'Potential: '}
           {checkboxes}
-          <button disabled={this.props.potential !== 5}>{'Advance'}</button>
+          <button disabled={this.props.potential !== 5} onClick={this.props.onAdvance}>{'Advance'}</button>
         </div>
         <div className={"potentialField"}>
-          <a href={'#'} onClick={this.openAdvancements}> {this.props.advancements.number + ' previous advancements'} </a>
+          <a href={'#'} onClick={this.openAdvancements}>{this.props.advancements.length + ' previous advancements'} </a>
         </div>
+        <Modal
+          isOpen={this.state.isOpen}
+          onRequestClose={this.closeAdvancements}
+          overlayClassName={"modalOverlay"}
+          className={"modalContent"}
+          contentLabel="advancements_modal">
+              <div className={"subheader"} style={{}}>{'Previous advancements'}</div>
+              {!this.props.advancements || this.props.advancements.length === 0
+                ? <div key={-1} className={"accordionText"}>{'This character has not taken any advancements'}</div>
+                : this.props.advancements.map((adv, i) =>
+                  <div key={i} className={"accordionText"}>{adv}</div>)}
+              <div className={"modalFooter"}>
+                <a href={"#"} className={"tinyLink"} onClick={this.closeAdvancements}>[close]</a>
+              </div>
+        </Modal>
       </div>
       )
     }

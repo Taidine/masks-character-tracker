@@ -1,19 +1,27 @@
-.conditionsTable {
-  width: 100%;
+
+.potentialGroup {
+  text-align: left;
+  flex-wrap: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
 }
 
-.conditionPenalty {
-  display: inline-block;
-  font-size: smaller;
-  margin-left: 5px;
+@media screen and (max-width: 600px) {
+  .potentialGroup {
+    text-align: center;
+    flex-wrap: wrap;
+  }
 }
 
-.markCondition {
-  text-align: center;
-  width: 55px;
+.potentialField {
+  flex-grow: 1;
 }
 
-.markClear {
-    font-size: small;
-    cursor: pointer;
+.potentialGroup input {
+  vertical-align: middle;
+}
+.potentialGroup button {
+  vertical-align: baseline;
+  margin: 0px 10px;
 }

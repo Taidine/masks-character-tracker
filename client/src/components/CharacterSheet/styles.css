@@ -112,29 +112,20 @@
   }
 }
 
-.potentialGroup {
-  text-align: left;
-  flex-wrap: nowrap;
+.modalOverlay {
+  position:fixed;
+  top:0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
-@media screen and (max-width: 600px) {
-  .potentialGroup {
-    text-align: center;
-    flex-wrap: wrap;
-  }
-}
-
-.potentialField {
-  flex-grow: 1;
-}
-
-.potentialGroup input {
-  vertical-align: middle;
-}
-.potentialGroup button {
-  vertical-align: baseline;
-  margin: 0px 10px;
+.modalContent {
+    background-color: white;
+    padding: 0px 10px 10px 10px;
+    border: 1px solid gray;
+    width: 300px;
+    margin: auto;
 }

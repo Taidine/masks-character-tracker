@@ -13,7 +13,7 @@ class MovesComponent extends Component {
   addMove = () => {
     let newMove = {name: '', text: ''}
     let oldMove = this.props.moves.slice().pop();
-    if (oldMove.text != '' && oldMove.name != ''){
+    if (oldMove.text !== '' && oldMove.name !== ''){
       this.props.onSave(this.props.moves.concat(newMove));
     }
   }

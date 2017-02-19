@@ -12,15 +12,42 @@ import ConditionComponent from '../ConditionComponent/ConditionComponent';
 import MovesComponent from '../MovesComponent/MovesComponent';
 import InfluenceComponent from '../InfluenceComponent/InfluenceComponent';
 import PotentialComponent from '../PotentialComponent/PotentialComponent';
+import AdvanceComponent from '../AdvanceComponent/AdvanceComponent.js';
 import { playbookOpts } from '../../data/constants';
 
 class CharacterSheet extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      advanceOpen: false,
+    };
+  }
 
   saveField = (name, value) => {
     let newField = {};
     newField[name] = value;
     const sheet = Object.assign({}, this.props.currentSheet, newField);
     this.props.updateSheet(sheet);
+  }
+
+  advance = (type, notes) => {
+    if (type) {
+      let newField = {};
+      if (type === "INCREASE_LABEL") {
+        newField = {maxLabels: Number(this.props.maxLabels) + 1};
+      } else if (type === "INCREASE_TWO_LABELS") {
+        newField = {maxLabels: Number(this.props.maxLabels) + 1};
+      } else if (type === "NEW_MOVE_OWN" || type === "NEW_MOVE_OTHER") {
+        newField = {moves: [].concat(this.props.moves).concat([{name: '', text: ''}])};
+      }
+      let advancements = this.props.currentSheet.advancements.concat([notes]);
+      const sheet = Object.assign({}, this.props.currentSheet, newField, advancements);
+      this.setState({advanceOpen: false}, () => this.props.updateSheet(sheet));
+    }
+  }
+
+  advanceOpen = (advanceOpen) => {
+    this.setState({advanceOpen});
   }
 
   onDeleteSheet = () => {
@@ -58,7 +85,16 @@ class CharacterSheet extends Component {
             initialValue={this.props.notes.value || 'No notes'}
             onSave={this.saveField.bind(this, 'notes')}/>
         </Accordion>
-        <PotentialComponent potential={this.props.potential} advancements={this.props.advancements} onSave={this.saveField.bind(this, 'potential')}/>
+        <PotentialComponent
+          potential={this.props.potential}
+          advancements={this.props.advancements}
+          onSave={this.saveField.bind(this, 'potential')}
+          onAdvance={this.advanceOpen.bind(this, true)}/>
+        <AdvanceComponent
+          onCancel={this.advanceOpen.bind(this, false)}
+          advance={this.advance}
+          isOpen={this.state.advanceOpen}
+          name={this.props.name} />
       </div>
     );
   }
