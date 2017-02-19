@@ -49,7 +49,10 @@ class PotentialComponent extends Component {
               {!this.props.advancements || this.props.advancements.length === 0
                 ? <div key={-1} className={"accordionText"}>{'This character has not taken any advancements'}</div>
                 : this.props.advancements.map((adv, i) =>
-                  <div key={i} className={"accordionText"}>{adv}</div>)}
+                  <div key={i}>
+                    <div className={"subheader"}>{adv.label}</div>
+                    <div className={"accordionText"}>{adv.text}</div>
+                  </div>)}
               <div className={"modalFooter"}>
                 <a href={"#"} className={"tinyLink"} onClick={this.closeAdvancements}>[close]</a>
               </div>

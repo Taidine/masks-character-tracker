@@ -7,7 +7,7 @@ const ADVANCE_TYPES = [
   {type: 'INCREASE_TWO_LABELS', label: "Increase any two labels by one"},
   {type: 'NEW_MOVE_OWN', label: "Take another move from your playbook"},
   {type: 'NEW_MOVE_OTHER', label: "Take a new move from another playbook"},
-  {type: 'OTHER', label: ""},
+  {type: 'OTHER', label: "Other"},
 ]
 
 class AdvanceComponent extends Component {
@@ -24,9 +24,8 @@ class AdvanceComponent extends Component {
   }
 
   handleChangeType = (e) => {
-    let label;
-    let notes = Object.assign({}, this.state.notes, {label});
-    this.setState({type: e.target.value})
+    let notes = Object.assign({}, this.state.notes, {label: e.target.value});
+    this.setState({type: e.target.name, notes});
   }
 
   handleChangeNotes = (e) => {
@@ -47,9 +46,12 @@ class AdvanceComponent extends Component {
         className={"modalContent"}
         contentLabel="Advancements">
             <div className={"subheader"} style={{marginLeft:'2px'}}>{`Mark an advancement for ${this.props.name}`}</div>
-            <div className={"radioGroup"}>{ADVANCE_TYPES.map((at) =>
-              <div>{at.type + ' ' + at.label}</div>
-            )}</div>
+            <div className={"radioGroup"}>{ADVANCE_TYPES.map((at, i) =>
+              <div>
+                <input key={i} type={"radio"} name={at.type} value={at.label} checked={at.type === this.state.type} onChange={this.handleChangeType} />
+                {at.label}
+              </div>)}
+            </div>
             <textarea className={"fieldTextArea"} type='text' value={this.state.notes.text} onChange={this.handleChangeNotes} />
             <div className={"modalFooter"}>
               <a href={"#"} className={"tinyLink"} onClick={this.handleCancel}>[cancel]</a>

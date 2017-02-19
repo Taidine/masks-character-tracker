@@ -40,8 +40,8 @@ class CharacterSheet extends Component {
       } else if (type === "NEW_MOVE_OWN" || type === "NEW_MOVE_OTHER") {
         newField = {moves: [].concat(this.props.moves).concat([{name: '', text: ''}])};
       }
-      let advancements = this.props.currentSheet.advancements.concat([notes]);
-      const sheet = Object.assign({}, this.props.currentSheet, newField, advancements);
+      let advancements = [].concat(this.props.currentSheet.advancements).concat([notes]);
+      const sheet = Object.assign({}, this.props.currentSheet, newField, {advancements}, {potential: 0});
       this.setState({advanceOpen: false}, () => this.props.updateSheet(sheet));
     }
   }
