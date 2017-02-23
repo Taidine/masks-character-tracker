@@ -42,6 +42,10 @@ class EditableField extends Component {
     this.props.onRemove({label: this.state.label, value: this.state.value});
   }
 
+  addLineBreaks = (text, i) => {
+    return <p key={i} className={"linebreak-text"}>{text}</p>
+  }
+
   render() {
     if (this.state.isEditing) {
       return (
@@ -55,8 +59,8 @@ class EditableField extends Component {
             : "" }
             <textarea className={"fieldTextArea"} type='text' value={this.state.value} onChange={this.changeValue} />
             <div className="fieldFooter">
-              <span className={"fieldSaveButton"} onClick={this.handleSave}>&#10003;</span>
-              {this.props.onRemove ? <span className={"fieldSaveButton"} onClick={this.handleCancel}>x</span> : ''}
+              <span className={"saveButton"} onClick={this.handleSave}>&#10003;</span>
+              {this.props.onRemove ? <span className={"cancelButton"} onClick={this.handleCancel}>x</span> : ''}
             </div>
           </div>
       );
@@ -64,7 +68,7 @@ class EditableField extends Component {
       return (
         <div onClick={this.openEdit}>
           {this.props.hasLabel === true ? <div className={"subheader"}>{this.props.initialLabel}</div> : ""}
-          <div className={this.props.className}>{this.props.initialValue}</div>
+          <div className={this.props.className}>{this.props.initialValue.split('\n').map(this.addLineBreaks)}</div>
         </div>
       );
     }

@@ -32,11 +32,17 @@
 .tinyLink {
   font-size: smaller;
   margin: 0px 5px;
+  color: blue;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .tinyLink.error {
   color: gray;
-  text-decoration: none;
+}
+
+.tinyNotLink {
+  font-size: smaller;
 }
 
 .bold {
@@ -128,4 +134,24 @@
     border: 1px solid gray;
     width: 300px;
     margin: auto;
+}
+
+/* Buttons: should be moved into their own component */
+
+.saveButton, .cancelButton {
+  display: inline-block;
+  margin: 0px 3px;
+  cursor: pointer;
+  font-size: 12pt;
+  line-height: 15pt;
+  height: 21px;
+  width: 21px;
+  text-align: center;
+  background-color: gray;
+  border-radius: 5px;
+}
+
+.saveButton:hover, .cancelButton:hover {
+  color: white;
+  background-color: black;
 }

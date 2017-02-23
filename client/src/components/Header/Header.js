@@ -63,7 +63,7 @@ class Header extends Component {
       return (<div>
                 <span onClick={this.openEdit}>{this.props.initialValue}</span>
                 { this.state.confirmDelete
-                  ? <a className={"tinyLink"}> {'Delete this character?'}
+                  ? <a className={"tinyNotLink"}> {'Delete this character?'}
                       <a className={"tinyLink"} href={'#'} onClick={this.toggleConfirmDelete}>{'[no, don\'t do it!]'}</a>
                       <a className={"tinyLink"} href={'#'} onClick={this.handleDelete}>{'[yes]'}</a>
                     </a>

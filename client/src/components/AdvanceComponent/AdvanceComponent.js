@@ -38,6 +38,8 @@ class AdvanceComponent extends Component {
   }
 
   render() {
+    let advanceTypes = [];
+    !this.props.banked ? advanceTypes = ADVANCE_TYPES.concat([{type: 'BANK', label: "Bank an advancement"}]) : advanceTypes = ADVANCE_TYPES;
     return (
       <Modal
         isOpen={this.props.isOpen}
@@ -46,7 +48,7 @@ class AdvanceComponent extends Component {
         className={"modalContent"}
         contentLabel="Advancements">
             <div className={"subheader"} style={{marginLeft:'2px'}}>{`Mark an advancement for ${this.props.name}`}</div>
-            <div className={"radioGroup"}>{ADVANCE_TYPES.map((at, i) =>
+            <div className={"radioGroup"}>{advanceTypes.map((at, i) =>
               <div>
                 <input key={i} type={"radio"} name={at.type} value={at.label} checked={at.type === this.state.type} onChange={this.handleChangeType} />
                 {at.label}

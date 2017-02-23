@@ -12,8 +12,8 @@
 }
 
 input.fieldInput {
-  height: 20px;
-  width: 120px;
+  height: 15pt;
+  width: 90px;
   display: inline-block;
 }
 
@@ -22,23 +22,6 @@ input.fieldInput {
   line-height: 32px;
   width: 140px;
   display: inline-block;
-}
-
-.saveButton {
-  display: inline-block;
-  padding: 3px 2px;
-  margin: 0px 3px;
-  cursor: pointer;
-  font-size: 15pt;
-  height: 15px;
-  line-height: 15px;
-  background-color: gray;
-  border-radius: 5px;
-}
-
-.saveButton:hover {
-  color: white;
-  background-color: black;
 }
 
 @media screen and (max-width: 600px) {

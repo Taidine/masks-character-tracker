@@ -33,15 +33,21 @@ class CharacterSheet extends Component {
   advance = (type, notes) => {
     if (type) {
       let newField = {};
+      let banked = false;
+      let potential = this.props.banked ? this.props.potential : 0;
+      let advancements = [].concat(this.props.currentSheet.advancements).concat([notes]);
       if (type === "INCREASE_LABEL") {
         newField = {maxLabels: Number(this.props.maxLabels) + 1};
       } else if (type === "INCREASE_TWO_LABELS") {
         newField = {maxLabels: Number(this.props.maxLabels) + 1};
       } else if (type === "NEW_MOVE_OWN" || type === "NEW_MOVE_OTHER") {
         newField = {moves: [].concat(this.props.moves).concat([{name: '', text: ''}])};
+      } else if (type === "BANK") {
+        newField = {};
+        banked = true;
+        advancements = [].concat(this.props.currentSheet.advancements);
       }
-      let advancements = [].concat(this.props.currentSheet.advancements).concat([notes]);
-      const sheet = Object.assign({}, this.props.currentSheet, newField, {advancements}, {potential: 0});
+      const sheet = Object.assign({}, this.props.currentSheet, newField, {advancements, potential, banked});
       this.setState({advanceOpen: false}, () => this.props.updateSheet(sheet));
     }
   }
@@ -88,10 +94,12 @@ class CharacterSheet extends Component {
         <PotentialComponent
           potential={this.props.potential}
           advancements={this.props.advancements}
+          banked={this.props.banked || false}
           onSave={this.saveField.bind(this, 'potential')}
           onAdvance={this.advanceOpen.bind(this, true)}/>
         <AdvanceComponent
           onCancel={this.advanceOpen.bind(this, false)}
+          banked={this.props.banked || false}
           advance={this.advance}
           isOpen={this.state.advanceOpen}
           name={this.props.name} />

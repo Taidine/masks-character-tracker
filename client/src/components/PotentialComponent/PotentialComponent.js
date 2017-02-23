@@ -34,7 +34,7 @@ class PotentialComponent extends Component {
         <div className={"potentialField"}>
           {'Potential: '}
           {checkboxes}
-          <button disabled={this.props.potential !== 5} onClick={this.props.onAdvance}>{'Advance'}</button>
+          <button disabled={this.props.potential !== 5 && !this.props.banked} onClick={this.props.onAdvance}>{'Advance'}</button>
         </div>
         <div className={"potentialField"}>
           <a href={'#'} onClick={this.openAdvancements}>{this.props.advancements.length + ' previous advancements'} </a>
@@ -53,6 +53,7 @@ class PotentialComponent extends Component {
                     <div className={"subheader"}>{adv.label}</div>
                     <div className={"accordionText"}>{adv.text}</div>
                   </div>)}
+              { this.props.banked ? <div className={"accordionText"}>{'One advancement banked.'}</div> : '' }
               <div className={"modalFooter"}>
                 <a href={"#"} className={"tinyLink"} onClick={this.closeAdvancements}>[close]</a>
               </div>

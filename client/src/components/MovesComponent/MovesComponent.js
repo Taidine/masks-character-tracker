@@ -26,8 +26,10 @@ class MovesComponent extends Component {
 
   deleteMove = (index) => {
     let moves = this.props.moves.slice();
-    moves.splice(index, 1);
-    this.props.onSave(moves);
+    if (moves.length > 1){
+      moves.splice(index, 1);
+      this.props.onSave(moves);
+    }
   }
 
   render() {

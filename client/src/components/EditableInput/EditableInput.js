@@ -65,8 +65,8 @@ class EditableInput extends Component {
         <div className={"field"}>
           {this.props.label ? <div className={"fieldLabel"}>{this.props.label}</div> : ""}
           {fieldContent}
-          <span className={"saveButton"} onClick={this.handleSave}>&#10003;</span>
-          {this.props.onRemove ? <span className={"saveButton"} onClick={this.handleCancel}>x</span> : ''}
+            <span className={"saveButton"} onClick={this.handleSave}>&#10003;</span>
+            {this.props.onRemove ? <span className={"cancelButton"} onClick={this.handleCancel}>x</span> : ''}
         </div>
       );
     } else {
